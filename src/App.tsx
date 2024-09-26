@@ -1,5 +1,38 @@
+import { useState } from "react";
+import TaskList from "./components/TaskList/TaskList";
+import TaskForm from "./components/TaskForm/TaskForm";
+import { Task } from ".//types/todoTypes";
+
 function App() {
-  return <>First commit</>;
+  // Estado para gestionar las tareas. Comienza con un array vacío.
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  // Función para agregar nuevas tareas
+  const addTask = (taskText: string) => {
+    const newTask: Task = {
+      id: tasks.length + 1, // Cada tarea tiene un id único
+      text: taskText,
+      completed: false,
+    }; // Cada tarea tiene un texto y un estado de completada
+    setTasks([...tasks, newTask]); // Agrega la nueva tarea al estado
+  };
+
+  // Función para eliminar una tarea
+  const deleteTask = (taskIndex: number) => {
+    const newTasks = tasks.filter((_, index) => index !== taskIndex); // Filtra las tareas eliminando la seleccionada
+    setTasks(newTasks); // Actualiza el estado con las tareas restantes
+  };
+
+  return (
+    <div className="App">
+      <h1>Lista de Tareas</h1>
+      {/* Renderiza el formulario para agregar tareas */}
+      <TaskForm onAdd={addTask} />
+
+      {/* Renderiza la lista de tareas, pasándole las tareas y la función para eliminarlas */}
+      <TaskList tasks={tasks} onDelete={deleteTask} />
+    </div>
+  );
 }
 
 export default App;
