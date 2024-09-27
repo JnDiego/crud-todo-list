@@ -18,20 +18,23 @@ function App() {
   };
 
   // Función para eliminar una tarea
-  const deleteTask = (taskIndex: number) => {
-    const newTasks = tasks.filter((_, index) => index !== taskIndex); // Filtra las tareas eliminando la seleccionada
+  const deleteTask = (taskId: number) => {
+    const newTasks = tasks.filter((task) => task.id !== taskId); // Filtra las tareas eliminando la seleccionada
     setTasks(newTasks); // Actualiza el estado con las tareas restantes
   };
 
+
   return (
-    <div className="App">
-      <h1>Lista de Tareas</h1>
+
+    <div className="App bg-gray-100 min-h-screen p-8 flex flex-col items-center">
+      <h1 className="text-3xl font-bold text-primaryColor mb-6">Lista de Tareas</h1>
       {/* Renderiza el formulario para agregar tareas */}
       <TaskForm onAdd={addTask} />
 
       {/* Renderiza la lista de tareas, pasándole las tareas y la función para eliminarlas */}
       <TaskList tasks={tasks} onDelete={deleteTask} />
     </div>
+
   );
 }
 

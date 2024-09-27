@@ -16,14 +16,20 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex gap-4 mb-6 w-full max-w-md">
       <input
         type="text"
-        placeholder="New task"
+        placeholder="Nueva tarea"
         value={taskText}
-        onChange={(e) => setTaskText(e.target.value)} // Actualiza el estado al escribir en el input
+        onChange={(e) => setTaskText(e.target.value)}
+        className="flex-grow px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primaryColor"
       />
-      <button type="submit">Add</button>
+      <button
+        type="submit"
+        className="bg-primaryColor text-white px-4 py-2 rounded-lg hover:bg-primaryColor transition duration-300"
+      >
+        Agregar
+      </button>
     </form>
   );
 };
